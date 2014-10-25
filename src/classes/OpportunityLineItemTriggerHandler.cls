@@ -95,25 +95,29 @@ public with sharing class OpportunityLineItemTriggerHandler {
             }
             //read entitlement term from product set-up and store it in variable  
             Integer EntTerm;
-            if (Product2Map.get(PriceBookToProduct.get(oli.PricebookEntryID)).Renewal_Term_Months__c != NULL) {
+            if (Product2Map.get(PriceBookToProduct.get(oli.PricebookEntryID)).Renewal_Term_Months__c != NULL && oli.Entitlement_Term__c == NULL) {
                 //EntTemplateMap.get(ProductEntTemplate.get(PriceBookToProduct.get(oli.PricebookEntryID)).EntitlementTemplateID).Term); 
                 EntTerm = Product2Map.get(PriceBookToProduct.get(oli.PricebookEntryID)).Renewal_Term_Months__c.intValue();
             } else {
-                EntTerm = 0;
-            }//go throught entitlement calc logic only for renewable products
+                EntTerm = Integer.valueOf(oli.Entitlement_Term__c);
+            }
+            system.debug('Entitlement Term ' + EntTerm);
+            //go through entitlement calc logic only for renewable products
             if (Product2Map.get(PriceBookToProduct.get(oli.PricebookEntryID)).Use_this_same_product_in_Renewal_Opp__c == true || 
                 Product2Map.get(PriceBookToProduct.get(oli.PricebookEntryID)).Product_To_Use_In_Renewal__c != NULL) { 
                 //set entitlement_start_date to service on a new record insert 
+                system.debug('Entitlement Start Date ' + oli.Entitlement_Start_Date__c);
                 if (oli.Entitlement_Start_Date__c == NULL) { 
                     oli.Entitlement_Start_Date__c = oli.ServiceDate;
                 }
                 // populating entitlement end date on a new record insert
-                if (oli.Entitlement_End_Date__c == NULL) {
+     //           if (oli.Entitlement_End_Date__c == NULL) {
                     // this isn't an Add-on Opportunity, so NO co-term calculation
                     if (Opp.get(oli.OpportunityId).Co_Term_With__c == NULL) { 
                         oli.Entitlement_End_Date__c = oli.Entitlement_Start_Date__c;
                         oli.Entitlement_End_Date__c = oli.Entitlement_End_Date__c.addMonths(EntTerm);       
                         oli.Entitlement_End_Date__c = oli.Entitlement_End_Date__c.addDays(-1);
+                        oli.Entitlement_Term__c = EntTerm;
                     //it's an Add-On opportunity, so perform co-term calculation    
                     } else { 
                         List<OpportunityLineItem> OppEndDate = new List<OpportunityLineItem>([
@@ -140,17 +144,39 @@ public with sharing class OpportunityLineItemTriggerHandler {
                                 oli.Entitlement_End_Date__c = OppEndDateWithDiffProduct[0].Entitlement_End_Date__c;
                             }    
                         }
-                    }
-                }
-                // calculate entitlement term based on to see if there was any change to it in case this line item is co-termed with some other line item on opportunity
-                Integer CalculatedEntTerm; 
-                CalculatedEntTerm = oli.Entitlement_Start_Date__c.daysBetween(oli.Entitlement_End_Date__c);
-                oli.Entitlement_Term__c = CalculatedEntTerm; //set entitlement term to be calculated entitlement term
+
+      //          }
+                        // calculate entitlement term based on to see if there was any change to it in case this line item is co-termed with some other line item on opportunity
+                        decimal CalculatedEntTerm; 
+                        date EntStartDate, EntEndDate;
+                        EntStartDate = oli.Entitlement_Start_Date__c;
+                        EntEndDate = oli.Entitlement_End_Date__c;
+                        If (EntEndDate != NULL) {
+                            if( EntStartDate.month()== EntEndDate.month() && EntStartDate.year()== EntEndDate.year() )
+                            {
+                                CalculatedEntTerm =  decimal.valueOf((EntStartDate.daysBetween(EntEndDate) ))/decimal.valueOf(date.daysInMonth(EntStartDate.year(),EntStartDate.month()));
+                            }
+                            else
+                            {
+                                Integer monthsBetween = EntStartDate.monthsBetween(EntEndDate)-1;
+                                system.debug('months between ' + monthsBetween);
+                                decimal firstMonth = decimal.valueOf(date.daysInMonth(EntStartDate.year() , EntStartDate.month())-EntStartDate.day()+1)/decimal.valueOf(date.daysInMonth(EntStartDate.year(), EntStartDate.month()));
+                                system.debug('first month ' + firstMonth.setScale(2, roundingMode.HALF_UP));
+                                decimal lastMonth =  decimal.valueOf(EntEndDate.toStartOfMonth().daysBetween(EntEndDate)+1)/decimal.valueOf(date.daysInMonth(EntEndDate.year(), EntEndDate.month()));
+                                system.debug('lastMonth ' + lastMonth.setScale(2, roundingMode.HALF_UP));
+                                CalculatedEntTerm = firstMonth.setScale(2, roundingMode.HALF_UP) + monthsBetween + lastMonth.setScale(2, roundingMode.HALF_UP);         
+                            }
+            
+                            
+                           // CalculatedEntTerm = MonthsBetween(EntStartDate, EntEndDate); //oli.Entitlement_Start_Date__c.monthsBetween(oli.Entitlement_End_Date__c);
+                            oli.Entitlement_Term__c = CalculatedEntTerm.setScale(1, roundingMode.HALF_UP); //set entitlement term to be calculated entitlement term
+                           }
+                     }
             }    
             //when opp is created via Renewal trigger, list price is NULL as it's a read only field where as UnitPrice is set there
             if (oli.ListPrice != NULL) { 
                 //setting sale price as list price from pricebook as no mark-up is entered
-                oli.UnitPrice = oli.ListPrice; 
+                //oli.UnitPrice = oli.ListPrice; 
                 if (oli.UnitPrice == NULL && oli.ListPrice != NULL) {
                     oli.UnitPrice = oli.ListPrice;
                 } 
@@ -159,10 +185,12 @@ public with sharing class OpportunityLineItemTriggerHandler {
                 if (Product2Map.get(PriceBookToProduct.get(oli.PricebookEntryID)).Use_this_same_product_in_Renewal_Opp__c == true || Product2Map.get(PriceBookToProduct.get(oli.PricebookEntryID)).Product_To_Use_In_Renewal__c != NULL) { 
                     if (Product2Map.get(PriceBookToProduct.get(oli.PricebookEntryID)).ProRate_Price__c == TRUE) {
                         //changing pro-rating to be based on months a renewal term is based on months on product set-up page
-                        oli.UnitPrice = oli.UnitPrice * (oli.Entitlement_Term__c/(oli.Entitlement_Start_Date__c.DaysBetween(oli.Entitlement_Start_Date__c.addMonths(EntTerm))-1));
+                        oli.UnitPrice = oli.UnitPrice * (oli.Entitlement_Term__c/(oli.Entitlement_Start_Date__c.MonthsBetween(oli.Entitlement_Start_Date__c.addMonths(Product2Map.get(PriceBookToProduct.get(oli.PricebookEntryID)).Renewal_Term_Months__c.intValue()))));
                     }
                 }  
             }
         }
     }
+    
+
 }

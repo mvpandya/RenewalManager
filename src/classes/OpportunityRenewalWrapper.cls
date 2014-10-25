@@ -16,4 +16,6 @@ public with sharing class OpportunityRenewalWrapper {
     public Opportunity opportunityObj{get;set;}
     public List<OpportunityLineItem> opportunityLineItemObjList = new List<OpportunityLineItem>();
     public ID prductIdFirst; 
+    public List<Opportunity> RenewedOpportunityObjList = new List<Opportunity>();
+    public List<OpportunityLineItem> RenewedOpportunityLineItemObjList = new List<OpportunityLineItem>();
 }

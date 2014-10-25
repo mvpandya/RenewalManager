@@ -135,10 +135,11 @@ public with sharing class OpportunityTriggerHandler {
             List <OpportunityCompetitor> bulkListOpportunityCompetitor = new List<OpportunityCompetitor>();
 
 system.debug('renewedOpptyMap::'+renewedOpptyMap);
-
+            List<ID> OpportunityIDs = new List<ID>();
             //Step-50 + 60: Create old and new Opportunities mapping
             for (String iCounter: renewedOpptyMap.keySet()) {
                 Opportunity renewedOpty = renewedOpptyMap.get(iCounter);
+                OpportunityIDs.add(renewedOpty.Id);
                 System.debug('\n\n' + iCounter + '.~~~~SUCCESS: Renewed Opportunity created: ' + renewedOpty.Name);
                 
                 /* Create a list for Source-Renewed-Oppty-Mapping-List */
@@ -176,11 +177,15 @@ system.debug('opt::2');
 
                 //create opportunity line items. Link OppLineItems to respective opportunity object created earlier
                 List<OpportunityLineItem> opportunityLineItemObjList = opptyRenewalWrapperMap.get(iCounter).opportunityLineItemObjList;
-                for (OpportunityLineItem lItem : opportunityLineItemObjList) {
-                    lItem.OpportunityId=renewedOpty.ID;
-                    //OpportunityLineItem List
-                    renewedOpptyProductList.add(lItem);
-                }
+                If (opportunityLineItemObjList != NULL && opportunityLineItemObjList.size() > 0){
+                    for (OpportunityLineItem lItem : opportunityLineItemObjList) {
+                        If (renewedOpty.ID != NULL && lItem.Id == NULL) {
+                            lItem.OpportunityId=renewedOpty.ID;
+                        }
+                        //OpportunityLineItem List
+                        renewedOpptyProductList.add(lItem);
+                    }
+                }               
 system.debug('actionableOpptyDetailsMap::'+actionableOpptyDetailsMap);
 system.debug('actionableOpptyDetailsMap.get(renewedOpty.Originating_Opportunity__c)::'+actionableOpptyDetailsMap.get(renewedOpty.Originating_Opportunity__c));
                 //Create Assets
@@ -204,7 +209,7 @@ system.debug('actionableOpptyDetailsMap.get(renewedOpty.Originating_Opportunity_
             system.debug('sourceRenewedOpptyMappingList::'+sourceRenewedOpptyMappingList);
             insert sourceRenewedOpptyMappingList;
             // OpportunityLineItem
-            insert renewedOpptyProductList; 
+            upsert renewedOpptyProductList; 
             if (bulkListOpportunityTeamMember.size() > 0) {
                 insert bulkListOpportunityTeamMember;
             }
@@ -215,22 +220,35 @@ system.debug('actionableOpptyDetailsMap.get(renewedOpty.Originating_Opportunity_
                 insert bulkListOpportunityCompetitor;
             }
 
+            Map<ID, Opportunity> OppAmountListMap = new Map<ID, Opportunity>([Select Id, Amount From Opportunity Where Id In :OpportunityIDs]);
+            
+            List<OpportunityLineItem> AllLineItemsOfOpp = new List<OpportunityLineItem>([Select Id, OpportunityId, UnitPrice, Quantity, Sales_Price_Per_Unit_Per_Ent_Term__c, Entitlement_Term__c, Product_Entitlement_Term_Set_Up__c, Discount, TotalPrice From OpportunityLineItem Where OpportunityId In :OpportunityIDs]);
+            Map<ID, OpportunityLineItem> AllLineItemsOfOppMap = new Map<ID, OpportunityLineItem>();
+            for (OpportunityLineItem OL : AllLineItemsOfOpp){
+                AllLineItemsOfOppMap.put(OL.OpportunityId, OL);
+            }
+            system.debug('All Line Item ' + AllLineItemsOfOpp);
             // Adding below logic to set Base_Line_Amount on renewal opportunity to Amount so that upgrade/downgrade logic works on renewal opp
             // Reason for adding this at end of this flow here so that OpportunityLineItem trigger also does it's magic to calculate pro-rate price and all
             for (String iCounter: renewedOpptyMap.keySet()) {
-                decimal baselineamount = 0.00;
+        /*        decimal baselineamount = 0.00;
                 if (renewedOpptyMap.get(iCounter).Base_Line_Amount__c != NULL) {
                     baselineamount = renewedOpptyMap.get(iCounter).Base_Line_Amount__c;
-                }
+                }*/
               
                 for (OpportunityLineItem BaseLineOppList : renewedOpptyProductList) {
                     if (BaseLineOppList.Opportunity_LineItem_ID__c != null && assetObjMap.containsKey(BaseLineOppList.Opportunity_LineItem_ID__c)) {
                         //Reset new OLI.
                         assetObjMap.get(BaseLineOppList.Opportunity_LineItem_ID__c).Originating_LineItem_ID__c = BaseLineOppList.ID;
                     }
-                    if (BaseLineOppList.OpportunityId == renewedOpptyMap.get(iCounter).ID) {
+                    
+                 /*   if (BaseLineOppList.OpportunityId == renewedOpptyMap.get(iCounter).ID) {
                         decimal LineItemTotal = 0.00;
-                        LineItemTotal = BaseLineOppList.Quantity * BaseLineOppList.UnitPrice;
+                        If (BaseLineOppList.Product_Entitlement_Term_Set_Up__c == NULL) {
+                               LineItemTotal = BaseLineOppList.UnitPrice * BaseLineOppList.Quantity;
+                        } else { 
+                        LineItemTotal = BaseLineOppList.UnitPrice * BaseLineOppList.Quantity * (BaseLineOppList.Entitlement_Term__c / BaseLineOppList.Product_Entitlement_Term_Set_Up__c ); // * BaseLineOppList.Sales_Price_Per_Unit_Per_Ent_Term__c * (BaseLineOppList.Entitlement_Term__c / BaseLineOppList.Product_Entitlement_Term_Set_Up__c ); // BaseLineOppList.UnitPrice;
+                        }
                         system.debug('LineItemTotal:  ' + LineItemTotal);
                         if ( BaseLineOppList.Discount != NULL) {
                             baselineamount += LineItemTotal * ((100 - BaseLineOppList.Discount)/100);
@@ -238,9 +256,20 @@ system.debug('actionableOpptyDetailsMap.get(renewedOpty.Originating_Opportunity_
                             baselineamount += LineItemTotal;
                             system.debug('baselineamount :  ' + baselineamount );
                         }               
-                    }
+                    }*/
+                } 
+                system.debug('Amount 123 ' + renewedOpptyMap.get(iCounter).Amount);
+                decimal baselineamount = 0.00;
+                for (OpportunityLineItem OL : AllLineItemsOfOpp){
+                    system.debug('OppID ' + renewedOpptyMap.get(iCounter).Id);
+                    system.debug('Opp Line Item ID ' + OL.Id);
+                    If (OL.OpportunityId == renewedOpptyMap.get(iCounter).Id){
+                        baselineamount += OL.Quantity * OL.UnitPrice * (OL.Entitlement_Term__c / OL.Product_Entitlement_Term_Set_Up__c );
+                        system.debug('Base Line Amount1 ' + baselineamount);
+                    }                
                 }
-                renewedOpptyMap.get(iCounter).Base_Line_Amount__c = baselineamount; 
+                system.debug('Base Line Amount ' + baselineamount);
+                renewedOpptyMap.get(iCounter).Base_Line_Amount__c = OppAmountListMap.get(renewedOpptyMap.get(iCounter).Id).Amount; //baselineamount; //renewedOpptyMap.get(iCounter).Amount; //baselineamount; 
             }
             //re-run it in order to update Base_Line_Amount field in opportunity entry    
             upsert renewedOpptyMap.values(); 
