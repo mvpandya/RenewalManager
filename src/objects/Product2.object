@@ -46,19 +46,11 @@
         <fullName>Family</fullName>
         <picklist>
             <picklistValues>
-                <fullName>Support</fullName>
+                <fullName>Maintenance Support</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Subscription</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Service</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Product Subscription</fullName>
+                <fullName>Custom Installs</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>

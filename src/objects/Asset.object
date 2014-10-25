@@ -43,6 +43,36 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Entitlement_End_Date__c</fullName>
+        <description>Asset Entitlement End Date</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Asset Entitlement End Date</inlineHelpText>
+        <label>Entitlement End Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Entitlement_Start_Date__c</fullName>
+        <description>Asset Entitlement Start Date</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Asset Entitlement Start Date</inlineHelpText>
+        <label>Entitlement Start Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Entitlement_Term__c</fullName>
+        <description>Asset Entitlement Term</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Asset Entitlement Term</inlineHelpText>
+        <label>Entitlement Term (Months)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Originating_LineItem_ID__c</fullName>
         <description>Originating LineItem from where this Asset is created first</description>
         <externalId>false</externalId>
@@ -68,19 +98,11 @@
         <fullName>ProductFamily</fullName>
         <picklist>
             <picklistValues>
-                <fullName>Support</fullName>
+                <fullName>Maintenance Support</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Subscription</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Service</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Product Subscription</fullName>
+                <fullName>Custom Installs</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>

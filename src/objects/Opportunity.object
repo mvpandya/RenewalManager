@@ -57,39 +57,11 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Hibernation</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Id%2E Decision Makers</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Needs Analysis</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Negotiation%2FReview</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Perception Analysis</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Proposal%2FPrice Quote</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Prospecting</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Qualification</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Value Proposition</fullName>
             <default>false</default>
         </values>
     </businessProcesses>
@@ -102,10 +74,6 @@
         </values>
         <values>
             <fullName>Closed Won</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Hibernation</fullName>
             <default>false</default>
         </values>
         <values>
@@ -143,7 +111,7 @@
     </businessProcesses>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <enableFeeds>true</enableFeeds>
-    <enableHistory>false</enableHistory>
+    <enableHistory>true</enableHistory>
     <fields>
         <fullName>AccountId</fullName>
         <trackFeedHistory>false</trackFeedHistory>
@@ -168,6 +136,7 @@
             <sorted>false</sorted>
         </picklist>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
@@ -180,6 +149,7 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
@@ -202,6 +172,7 @@
         <relationshipName>CoTermOpp</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
@@ -215,6 +186,7 @@
         <relationshipName>Contact1</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
@@ -241,6 +213,7 @@
             <sorted>false</sorted>
         </picklist>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
@@ -274,12 +247,25 @@
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>OrderNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>Order Number</label>
+        <length>8</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Original_Term_Expiration_Date__c</fullName>
         <externalId>false</externalId>
         <inlineHelpText>Date by which customers right to use the products expire if the renewal opportunity is not closed won.</inlineHelpText>
         <label>Original Term Expiration Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
@@ -295,6 +281,7 @@
         <relationshipName>Opportunities</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
@@ -310,6 +297,7 @@
         <label>Product Count</label>
         <summaryForeignKey>OpportunityLineItem.OpportunityId</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Summary</type>
     </fields>
@@ -320,52 +308,13 @@
         <inlineHelpText>Is this opportunity ready for creation of renewal opportunity? If so, check this box and Renewal Manager App will auto create renewal opportunity as this opportunity is won.</inlineHelpText>
         <label>Renewal Needed and Ready for It</label>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>Renewal_Period__c</fullName>
-        <description>The period determines if renewal opportunities are closed in time of contract expiration. Early renewal indicates that the opportunity was closed won prior to original contract expiration date. Carryover indicated that there is lapse in renewal and the original contract has/was expired prior to closing the renewal opportunity.</description>
-        <externalId>false</externalId>
-        <formula>IF(AND(NOT(ISNULL(Original_Term_Expiration_Date__c)),NOT(ISNULL(CloseDate)) ), 
-IF( (NOT(IsWon) &amp;&amp; (Original_Term_Expiration_Date__c &lt; TODAY()) ), 
-&quot;Carry Over Renewal&quot;, 
-IF(YEAR( Original_Term_Expiration_Date__c ) &gt; YEAR( CloseDate) , 
-&quot;Early Renewal&quot;, 
-IF(YEAR( Original_Term_Expiration_Date__c) &lt; YEAR( CloseDate) , 
-&quot;Carry Over Renewal&quot;, 
-IF((YEAR( Original_Term_Expiration_Date__c) = YEAR( CloseDate)) &amp;&amp;(MONTH( Original_Term_Expiration_Date__c) &lt; MONTH( CloseDate)) , 
-&quot;Carry Over Renewal&quot;, 
-IF( (YEAR( Original_Term_Expiration_Date__c) = YEAR( CloseDate)) &amp;&amp;(MONTH( Original_Term_Expiration_Date__c) = MONTH( CloseDate)) , 
-&quot;In Period Renewal&quot;, 
-IF((YEAR( Original_Term_Expiration_Date__c) = YEAR( CloseDate)) &amp;&amp;(MONTH(Original_Term_Expiration_Date__c) &gt; MONTH( CloseDate)) , 
-&quot;Early Renewal&quot;, NULL) 
-)
-)
-)
-)
-)
-,
-&quot;&quot;)</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>Determines if renewals are closed in time of contract expiration. Early renewal means opportunity was closed prior to original contract expiration date. Carryover indicates a lapse in renewal: original contract has/was expired prior to closing the renewal</inlineHelpText>
-        <label>Renewal Period</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>StageName</fullName>
         <picklist>
-            <picklistValues>
-                <fullName>Hibernation</fullName>
-                <closed>false</closed>
-                <default>false</default>
-                <forecastCategory>Pipeline</forecastCategory>
-                <probability>10</probability>
-                <won>false</won>
-            </picklistValues>
             <picklistValues>
                 <fullName>Prospecting</fullName>
                 <closed>false</closed>
@@ -487,6 +436,7 @@ IF((YEAR( Original_Term_Expiration_Date__c) = YEAR( CloseDate)) &amp;&amp;(MONTH
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
@@ -547,6 +497,7 @@ IF((YEAR( Original_Term_Expiration_Date__c) = YEAR( CloseDate)) &amp;&amp;(MONTH
             <sorted>false</sorted>
         </picklist>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
@@ -564,6 +515,7 @@ IF(Amount &lt; Base_Line_Amount__c,
         <inlineHelpText>Indicates that the renewal is an upgrade or downgrade from original customer purchase.</inlineHelpText>
         <label>Upgrade/Downgrade?</label>
         <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -653,7 +605,22 @@ IF(Amount &lt; Base_Line_Amount__c,
         </filters>
         <label>Won</label>
     </listViews>
+    <namedFilters>
+        <fullName>Opportunity_00No0000007PjYBEA0</fullName>
+        <active>true</active>
+        <field>Opportunity.Co_Term_With__c</field>
+        <filterItems>
+            <field>Opportunity.AccountId</field>
+            <operation>equals</operation>
+            <valueField>$Source.AccountId</valueField>
+        </filterItems>
+        <infoMessage>Only Opportunities tied to same account will be seen when this filter is enabled.</infoMessage>
+        <isOptional>true</isOptional>
+        <name>Opportunity_Co-Term With</name>
+        <sourceObject>Opportunity</sourceObject>
+    </namedFilters>
     <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <recordTypes>
         <fullName>CD_Sales</fullName>
         <active>true</active>
@@ -884,77 +851,6 @@ IF(Amount &lt; Base_Line_Amount__c,
             </values>
             <values>
                 <fullName>Switched to competitor</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-    </recordTypes>
-    <recordTypes>
-        <fullName>test</fullName>
-        <active>true</active>
-        <businessProcess>CD_Sales Process</businessProcess>
-        <label>test</label>
-        <picklistValues>
-            <picklist>ForecastCategoryName</picklist>
-            <values>
-                <fullName>Best Case</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Closed</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Commit</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Omitted</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Pipeline</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>LeadSource</picklist>
-            <values>
-                <fullName>Other</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Partner Referral</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Phone Inquiry</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Purchased List</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Web</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Type</picklist>
-            <values>
-                <fullName>Existing Customer - Downgrade</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Existing Customer - Replacement</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Existing Customer - Upgrade</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>New Customer</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

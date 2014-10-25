@@ -68,6 +68,17 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Discount_based_on_Sale_Price__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( PricebookEntry.Product2.ProRate_Price__c = TRUE, (ListPrice -  (UnitPrice/  (Entitlement_Term__c /  PricebookEntry.Product2.Renewal_Term_Months__c )))/ListPrice, (ListPrice - UnitPrice)/ListPrice)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Discount based on Sale Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Percent</type>
+    </fields>
+    <fields>
         <fullName>Entitlement_End_Date__c</fullName>
         <description>Enter entitlement end date</description>
         <externalId>false</externalId>
@@ -90,10 +101,10 @@
         <description>Enter entitlement term</description>
         <externalId>false</externalId>
         <inlineHelpText>Enter entitlement term</inlineHelpText>
-        <label>Entitlement Term</label>
+        <label>Entitlement Term (Months)</label>
         <precision>18</precision>
         <required>false</required>
-        <scale>0</scale>
+        <scale>2</scale>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -142,6 +153,30 @@
         <fullName>Product2Id</fullName>
         <type>Lookup</type>
     </fields>
+    <fields>
+        <fullName>Product_Entitlement_Term_Set_Up__c</fullName>
+        <externalId>false</externalId>
+        <formula>PricebookEntry.Product2.Renewal_Term_Months__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Product Entitlement Term Set-Up</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Price_Per_Unit_Per_Ent_Term__c</fullName>
+        <description>Sales Price Per Unit Per Entitlement Term</description>
+        <externalId>false</externalId>
+        <formula>UnitPrice / (Entitlement_Term__c / PricebookEntry.Product2.Renewal_Term_Months__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Price Per Unit Per Ent Term</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
     <validationRules>
         <fullName>Entitlement_End_Date_less_than_StartDate</fullName>
         <active>true</active>
@@ -162,5 +197,13 @@
         <description>Locking editing of Opportunity Line Items of Closed Won opportunities</description>
         <errorConditionFormula>Opportunity.IsWon == TRUE &amp;&amp; Opportunity.Ready_For_Renewal__c == TRUE &amp;&amp; ($Profile.Name &lt;&gt; &apos;System Administrator&apos;)</errorConditionFormula>
         <errorMessage>Opportunity tied to this line item is &apos;Won&apos; and renewal has already been created from it. Hence, this line item can&apos;t be edited further. Please consult system administrator for your org for any desired changes.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Sale_Price_cannot_be_greater_than_List_P</fullName>
+        <active>true</active>
+        <description>Sale Price cannot be greater than List Price</description>
+        <errorConditionFormula>(ListPrice * PricebookEntry.Product2.Renewal_Term_Months__c) &lt;  (UnitPrice / (Entitlement_Term__c / PricebookEntry.Product2.Renewal_Term_Months__c))</errorConditionFormula>
+        <errorDisplayField>UnitPrice</errorDisplayField>
+        <errorMessage>Sales Price cannot be greater than List Price</errorMessage>
     </validationRules>
 </CustomObject>

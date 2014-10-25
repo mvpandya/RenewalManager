@@ -65,6 +65,42 @@
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
+        <fullName>Entitlement_End_Date__c</fullName>
+        <description>Prior Entitlement End Date</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Prior Entitlement End Date</inlineHelpText>
+        <label>Entitlement End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Entitlement_Start_Date__c</fullName>
+        <description>Prior Entitlement Start Date</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Prior Entitlement Start Date</inlineHelpText>
+        <label>Entitlement Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Entitlement_Term__c</fullName>
+        <description>Prior Entitlement Term</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Prior Entitlement Term</inlineHelpText>
+        <label>Entitlement Term</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Originating_LineItem_ID__c</fullName>
         <externalId>false</externalId>
         <label>Originating LineItem ID</label>
@@ -83,6 +119,19 @@
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Price__c</fullName>
+        <description>Keeps track of Asset Price History changes</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Keeps track of Asset price history changes</inlineHelpText>
+        <label>Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
     </fields>
     <fields>
         <fullName>Quantity__c</fullName>

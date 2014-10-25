@@ -112,6 +112,19 @@
         <type>Lookup</type>
     </fields>
     <label>Source/Renewal Opp Mapping</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>OBJECT_ID</columns>
+        <columns>NAME</columns>
+        <columns>Account_Name__c</columns>
+        <columns>Close_Date__c</columns>
+        <columns>Renewal_Opp__c</columns>
+        <columns>Opp_name__c</columns>
+        <columns>Source_Opp__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
     <nameField>
         <displayFormat>S-{0000}</displayFormat>
         <label>Source Opp Mapping Name</label>
@@ -119,6 +132,19 @@
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Source/Renewal Opp Mappings</pluralLabel>
-    <searchLayouts/>
+    <searchLayouts>
+        <customTabListAdditionalFields>OBJECT_ID</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Account_Name__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Close_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Renewal_Opp__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Opp_name__c</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>OBJECT_ID</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Account_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Close_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Renewal_Opp__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Opp_name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Source_Opp__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OWNER.ALIAS</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
 </CustomObject>
