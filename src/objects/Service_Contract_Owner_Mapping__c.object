@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Account_Location__c</fullName>
+        <description>Enter account shipping country location. When left blank, it applies to all account locations.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter account shipping country location. When left blank, it applies to all account locations.</inlineHelpText>
+        <label>Account Location</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Type__c</fullName>
+        <description>Enter account type. When left blank, it applies to all account types.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter account type. When left blank, it applies to all account types.</inlineHelpText>
+        <label>Account Type</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assign_to_Account_Owner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Assign Renewal Opportunities to Account Owner</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Assign Renewal Opportunities to Account Owner</inlineHelpText>
+        <label>Assign to Account Owner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Product__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Pick Product. When left blank, it applies to all Products.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Pick Product. When left blank, it applies to all Products.</inlineHelpText>
+        <label>Product</label>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Service Contract Owner Mappings</relationshipLabel>
+        <relationshipName>Renewal_Opp_Owner_Mappings</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Renewal_Opp_Owner__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Select the user to whom Renewal Opportunity should be assigned for this mapping.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the user to whom Renewal Opportunity should be assigned for this mapping.</inlineHelpText>
+        <label>Renewal Opp Owner</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Renewal_Opp_Owner_Mappings</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Service_Contract_Owner__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Select the user to whom Service Contracts should be assigned for this mapping.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the user to whom Service Contracts should be assigned for this mapping.</inlineHelpText>
+        <label>Service Contract Owner</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Service_Contract_Owner_Mappings</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Service Contract Owner Mapping</label>
+    <nameField>
+        <label>Mapping Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Service Contract Owner Mappings</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

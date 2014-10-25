@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>*</members>
+        <name>AccountSharingRules</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>AssignmentRules</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CampaignSharingRules</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CaseSharingRules</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ContactSharingRules</name>
+    </types>
+    <types>
+        <members>Renewal_Mangement</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>*</members>
+        <members>Asset</members>
+        <members>Opportunity</members>
+        <members>OpportunityLineItem</members>
+        <members>Product2</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Account_management_Dashboard</members>
+        <members>Account_management_Dashboard/RenewalPerformanceDashboard</members>
+        <name>Dashboard</name>
+    </types>
+    <types>
+        <members>Renewal_Manager_Logo</members>
+        <members>Renewal_Manager_Logo/Comity_Designs_Logo.gif</members>
+        <members>Renewal_Manager_Logo/Comity_Designs_Logo_Small.gif</members>
+        <members>Renewal_Manager_Logo/RenewalManagerLogo.png</members>
+        <name>Document</name>
+    </types>
+    <types>
+        <members>Renewal_Mgr_Email_Templates</members>
+        <members>Renewal_Mgr_Email_Templates/Renewal_Opp_Creation_Notification</members>
+        <name>EmailTemplate</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>EscalationRules</name>
+    </types>
+    <types>
+        <members>Asset-Asset %28Renewal%29 Layout</members>
+        <members>Asset-Asset Layout</members>
+        <members>Asset_History__c-Asset History Layout</members>
+        <members>Opp_Record_Type_Mapping__c-Opp Record Type Mapping Layout</members>
+        <members>Opportunity-CD_Opportunity %28Renewal%29 Layout</members>
+        <members>Opportunity-Opportunity Layout</members>
+        <members>OpportunityLineItem-Opportunity Product %28Renewal%29 Layout</members>
+        <members>OpportunityLineItem-Opportunity Product Layout</members>
+        <members>OpportunityTeamMember-Opportunity Team Member Layout</members>
+        <members>Product2-Product %28Renewal%29 Layout</members>
+        <members>Renewal_App_Setup__c-Renewal App Setup Layout</members>
+        <members>Service_Contract_Owner_Mapping__c-Service Contract Owner Mapping Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>LeadSharingRules</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>OpportunitySharingRules</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
+        <members>Renewal_Reports</members>
+        <members>Renewal_Reports/CloseRateforCurrentQuarter</members>
+        <members>Renewal_Reports/CurrentQtrRenewalPipelineByStage</members>
+        <members>Renewal_Reports/NumberOfRenewalsToCloseThisMonth</members>
+        <members>Renewal_Reports/OpenRenewalsThisMonth</members>
+        <members>Renewal_Reports/RenewalOpportunitiesByCloseDate</members>
+        <members>Renewal_Reports/RenewalPipelineCloseMonthProdFam</members>
+        <members>Renewal_Reports/RenewalWinByProductFamily</members>
+        <members>Renewal_Reports/RenewalsBookingQTD</members>
+        <members>Renewal_Reports/SaleActivityReport</members>
+        <members>Renewal_Reports/TopOpenRenewalDealsThisQuartrer</members>
+        <members>Renewal_Reports/TopUpgradeOpportunities</members>
+        <members>Renewal_Reports/Top_At_Risk_Renewals</members>
+        <members>Renewal_Reports/Top_Upgrade_Opportunity</members>
+        <members>Renewal_Reports/TwoQuarterRenewalPipelineByStage</members>
+        <members>Renewal_Reports/Upgrade_Downgrade_by_reason</members>
+        <name>Report</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>UserSharingRules</name>
+    </types>
+    <types>
+        <members>Asset</members>
+        <members>Asset_History__c</members>
+        <members>Opp_Record_Type_Mapping__c</members>
+        <members>Opportunity</members>
+        <members>OpportunityLineItem</members>
+        <members>OpportunityTeamMember</members>
+        <members>Product2</members>
+        <members>Renewal_App_Setup__c</members>
+        <members>Service_Contract_Owner_Mapping__c</members>
+        <name>Workflow</name>
+    </types>
+    <version>29.0</version>
+</Package>

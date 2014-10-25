@@ -1,0 +1,142 @@
+<apex:page >
+
+<style type="text/css" media="all">
+body#main_tableBody {
+  font-family: arial, helvetica, verdana, sans-serif;
+  font-size: 80%;
+  margin: 0;
+  padding: 0;
+  width: 97%;
+}
+img {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+p.baseP {
+  margin: 0;
+  padding: 0;
+}
+h1.appName {
+  font-weight: bold;
+  font-size: 100%;
+  color: #FFF;
+  background-color: #669966;
+  padding: 10px 0 10px 8px;
+  margin: 0 0 15px 0;
+}
+h2.baseTitle {
+  color: #FFF;
+  padding: 2px 0 2px 8px;
+  margin-top: 0;
+  background-color: #638658;
+  font-size: 90%;
+}
+.exchangeTitle {
+  background-color: #999;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  color: white;
+}
+#main_table {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+#main_table td {
+  margin: 0;
+  padding: 0;
+}
+#main_table #main_tableLeft {
+  vertical-align: top;
+  background-color: #F3F3EC;
+  border-bottom: 2px solid #638658;
+}
+#main_table #main_tableCenter {
+  display:block;
+  width: 15px;
+  background-color: #FFF;
+}
+#main_table #main_tableRight {
+  vertical-align: top;
+  background-color: #E8E8E8;
+  border-bottom: 2px solid #999;
+}
+#main_table #main_tableLeft .about_rm, #main_table #main_tableLeft .exchange {
+  width: 100%;
+}
+#main_table #main_tableRight .exchange p {
+  color: #333;
+  margin: 0 10px 12px 10px;
+  line-height: 1.4em;
+}
+#main_table #main_tableLeft .about_rm p {
+  color: #333;
+  margin: 0 10px 12px 15px;
+  line-height: 1.4em;
+}
+#main_table #main_tableLeft .about_rm fieldset {
+  color: #333;
+  margin: 0 15px 10px 15px;
+  padding: 2px;
+}
+#main_table #main_tableLeft .about_rm fieldset ul {
+  padding: 0;
+  margin: .3em 0 .3em 2em;
+}
+#main_table #main_tableLeft .about_rm fieldset li {
+  padding: 0;
+  margin: 0;
+}
+#main_table #main_tableLeft .about_rm legend {
+  color: #333;
+  font-weight: bold;
+}
+.imgDiv {
+  text-align: center;
+  padding: 0 0 10px 0; 
+}
+
+</style>
+
+
+<table cellspacing="0" id="main_table"> 
+<tbody><tr>
+<td width="75%" id="main_tableLeft" style="padding-top:10px;">
+<div class="about_rm">
+
+<fieldset>
+<legend>Test Drive Instructions</legend>
+<ul>
+<li>Click <a target="_new" href="http://www.google.com">here</a> for instructions to run this Test Drive.</li>
+<li>To learn more about Renewal Manager visit <a target="_new" href="http://comitydesigns.com/products/renewal-manager">Comity Designs</a></li>
+</ul>
+</fieldset>
+<p class="baseP">Comity Designs Renewal Manager automatically creates Renewal opportunities and lets you add appropriate products and services in that Renewal opportunity whether it’s a new sale, additional sales that is coterminous with original sales or an upgrade.</p>
+<p class="baseP">Support and Renewals is a significant revenue stream for many companies.  Most companies manage Renewals through people intensive, ad hoc, back office processes and miss the opportunity to upsell and gain valuable customer insight. Comity Designs Renewal Manager automates Renewal sales for companies of all size with automated workflow and visibility for all Renewals in an integrated 100% native Force.com application.</p>
+<p class="baseP">In addition to automated Renewal creation, various Renewal processes and tasks based on key opportunity attributes are supported. Comity Designs Renewal Manager provides reports and visibility into sales activity monitoring for compliance and follow through with the best practices.</p>
+<p class="baseP">Comity Designs Renewal Manager dashboard provides total visibility into Renewal pipeline, at risk Renewals, Renewal retention percentage and upgrades/downgrades across the regions and by product family.  With a single point of information and real time updates gathered from many parts of the organization such as sales, support, sales ops, finance and account management, Renewal team eliminates wasted time of working through spreadsheets, emails and looking through multiple contracts and applications – and that results in higher Renewal retention and more satisfied customers.</p>
+
+
+</div>
+</td>
+
+<td><div id="main_tableCenter"> </div></td>
+
+<td width="25%" id="main_tableRight">
+<div class="exchangeTitle">About Comity Designs </div>
+<br/>
+<div class="exchange">
+
+
+<div class="imgDiv"><img alt="About Comity Designs Inc" src="http://comitydesignsinc.com/wp/wp-content/themes/corporate_10/images/logo.png"/></div>
+<p class="baseP">
+Comity Designs delivers services and products that help companies streamline their business processes and successfully integrate applications. We leverage Salesforce.com CRM and Force.com platform to streamline customers’ business processes and integrate Salesforce.com with other applications.  We provide application development and implementation consulting that is focused on end user adoption and rapid roll out</p>
+<div class="imgDiv"><a target="_new" href="http://www.salesforce.com/appexchange"><img border="0" alt="the Appexchange" src="https://www.salesforce.com/us/appexchange/assets/btnGetApps.gif"/></a></div>
+</div>
+</td>
+</tr>
+</tbody></table>
+
+</apex:page>

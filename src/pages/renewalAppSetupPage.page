@@ -1,0 +1,137 @@
+<apex:page id="pageId" controller="RenewalAppSetupController" action="{!init}" sidebar="false">
+    <!-- Javascript -->
+    <script type="text/javascript"> 
+        function dynamicAssignRenewalToField() {       
+            var renewalOpptyOwnerInputField = document.getElementById('pageId:formId:pageBlockId:pageBlockSectionId:renOpptyOwnerInputId');
+            var renUserInputFld = document.getElementById('pageId:formId:pageBlockId:pageBlockSectionId:renUserInputId'); 
+            console.log(renUserInputFld.parentNode)
+            console.log(renewalOpptyOwnerInputField.parentNode);
+            if (renewalOpptyOwnerInputField.value == 'A specific User') {
+                renUserInputFld.parentNode.parentNode.parentNode.style.display = "";
+            } else {
+                renUserInputFld.parentNode.parentNode.parentNode.style.display = "none" ; 
+            }
+        }
+    </script>
+ 
+   <style>
+        .ct {
+            text-align:center;
+        }
+         /* Color for the title bar */
+        .body .bPageBlock, body #bodyCell .bResource .secondaryPalette, body .secondaryPalette.bPageBlock, body .individualPalette .secondaryPalette.bPageBlock, body .bodyDiv .genericTable, body .genericPageBlockTable, body .bodyDiv .bSubBlock, body .bComponentBlock .bPageBlock, body .bMyDashboard .bPageBlock, body.rlHoverFrame .bPageBlock, body.subjectSelectionPopup div.choicesBox, body.lookupTab .secondaryPalette.bPageBlock, body.popupTab .secondaryPalette.bPageBlock, body.UserTagStatsPage .secondaryPalette.bPageBlock {
+            background-color:white;
+        }
+        /* Color for the pageblock background */
+        .bPageBlock .pbBody {
+            background-color:white;
+        }
+   </style>   
+    <apex:form id="formId">
+        <apex:pageblock id="pageBlockId" title="Setup Information">
+            <apex:pageMessages />
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}" rendered="{!isValid}"/>
+            </apex:pageBlockButtons>
+            <apex:outputPanel id="mainPanel" rendered="{!isValid}">
+                <apex:pageBlockSection id="pageBlockSectionId" title="Field values for auto created Renewal Opportunity" columns="2" collapsible="false">
+                    <apex:pageBlockSectionItem id="renOpptyPageBlockSection">
+                        <apex:outputText value="Renewal Opportunity Default Stage" style="align:right"/>
+                        <apex:selectList id="DefaultOppStage" required="true" Value="{!renewalSetupObject.Renewal_Stage__c}" multiselect="false" size="1" style="width:200px">
+                            <apex:selectOptions value="{!OpportunityStageList}" />
+                        </apex:selectList> 
+                    </apex:pageBlockSectionItem>
+                    <apex:inputField value="{!renewalSetupObject.Prefix_for_Renewal_Opportunity_Name__c}" required="true"  style="width:200px" />
+                    <apex:pageBlockSectionItem id="renOpptyTypePageBolockSection">
+                        <apex:outputText value="Renewal Opportunity Type" style="align:right"/>
+                        <apex:selectList id="RenewalOppType" required="true" Value="{!renewalSetupObject.Renewal_Opportunity_Type__c}" multiselect="false" size="1" style="width:200px">
+                            <apex:selectOptions value="{!OpportunityTypeList}" />
+                        </apex:selectList> 
+                    </apex:pageBlockSectionItem>  
+                    <apex:inputField id="renOpptyOwnerInputId" value="{!renewalSetupObject.Renewal_Opportunity_Owner__c}" onchange="dynamicAssignRenewalToField();" required="true"/>
+                    <apex:pageBlockSectionItem id="emptyPbSirenUserInput"> <!-- empty selectItem--> </apex:pageBlockSectionItem>
+                    <apex:inputField id="renUserInputId" value="{!renewalSetupObject.User__c}" />                   
+                    <script type="text/javascript">
+                        window.onload = dynamicAssignRenewalToField();
+                    </script>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="Fields Not to Copy" columns="2" collapsible="false">
+                     <apex:outputText value="Opportunity Field To Not Copy on Renewal" style="font-weight:bold"/> 
+                     <apex:outputText value="Opportunity Products Field To Not Copy on Renewal" style="font-weight:bold" />
+                     <apex:panelGrid columns="3">
+                         <apex:selectList id="opptyUnselected_list" required="false" value="{!selectedOpptyFields}" multiselect="true" size="5" style="width:200px">
+                             <apex:selectOptions value="{!unSelectedOptionsOpptyFields}" />
+                         </apex:selectList>
+                         <apex:panelGroup >
+                             <apex:commandButton value=">>" action="{!DoSelectOpptyFields}" rerender="opptySelected_list, opptyUnselected_list" />
+                             <br/>
+                             <apex:commandButton value="<<" action="{!DoUnselectOpptyFields}" rerender="opptySelected_list, opptyUnselected_list" />
+                         </apex:panelGroup>
+                         <apex:selectList id="opptySelected_list" required="false" value="{!unselectedOpptyFields}" multiselect="true" size="5" style="width:200px">
+                             <apex:selectOptions value="{!selectedOptionsOpptyFields}" />
+                         </apex:selectList>
+                     </apex:panelGrid>
+                    <apex:panelGrid columns="3">
+                        <apex:selectList id="opptyLIUnselected_list" required="false" value="{!selectedOpptyLIFields}" multiselect="true" size="5" style="width:200px">
+                            <apex:selectOptions value="{!unSelectedOptionsOpptyLIFields}" />
+                        </apex:selectList>
+                        <apex:panelGroup >
+                            <apex:commandButton value=">>" action="{!DoSelectOpptyLIFields}" rerender="opptyLISelected_list, opptyLIUnselected_list" />
+                            <br/>
+                            <apex:commandButton value="<<" action="{!DoUnselectOpptyLIFields}" rerender="opptyLISelected_list, opptyLIUnselected_list" />
+                        </apex:panelGroup>
+                        <apex:selectList id="opptyLISelected_list" required="false" value="{!unselectedOpptyLIFields}" multiselect="true" size="5" style="width:200px">
+                            <apex:selectOptions value="{!selectedOptionsOpptyLIFields}" />
+                        </apex:selectList>
+                    </apex:panelGrid>
+                </apex:pageBlockSection>  
+                <apex:pageBlockSection id="AssetEntitlementsSvcContracts" columns="2" collapsible="false">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputpanel >
+                            <apex:pageBlockSection columns="1" collapsible="false">
+                                <apex:facet name="header">
+                                    <span style="color:white;font-size:small;">Does your Org use Assets?</span>
+                                </apex:facet> 
+                            </apex:pageBlockSection>
+                            <apex:pageBlockSection columns="1" collapsible="false">
+                                <apex:inputField id="status" value="{!renewalSetupObject.Asset__c}" />
+                            </apex:pageBlockSection>                                                               
+                        </apex:outputpanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputpanel >
+                            <apex:pageBlockSection columns="1" collapsible="false">
+                                <apex:facet name="header">
+                                    <span style="color:white;font-size:small;">Do you want to CLONE below Related List?</span>
+                                    </apex:facet> 
+                            </apex:pageBlockSection>
+                            <apex:pageBlockSection columns="2" collapsible="false">
+                                <apex:inputField id="status" value="{!renewalSetupObject.Clone_Competitors_Related_List__c}" />
+                                <apex:inputField id="Clone_Contact_Roles" value="{!renewalSetupObject.Clone_Contact_Roles__c}" />
+                                <apex:inputField id="Clone_Opp_Team" value="{!renewalSetupObject.Clone_Opp_Team_Related_List__c}" />
+                            </apex:pageBlockSection>                                                               
+                        </apex:outputpanel>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>   
+            </apex:outputPanel>  
+            <apex:pageBlockSection title="Mapping for Opportunity Record Type" columns="1" collapsible="false" >
+                <apex:dataTable value="{!oppRecTypeMappingList}" var="mapRec" rowClasses="odd,even"  border="1" width="100%" cellpadding="2" cellspacing="2">
+                    <apex:column >
+                        <apex:facet name="header">Source Opportunity Record Type</apex:facet>
+                            <apex:outputField value="{!mapRec.name}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Source Opportunity Record Type Description</apex:facet>
+                        <apex:outputField value="{!mapRec.Source_Opp_Record_Type_Name__c}" /> 
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Renewal Opportunity Record Type</apex:facet>
+                        <apex:selectList value="{!mapRec.Renewal_Opp_Record_Type_ID__c}" multiselect="false" size="1" style="width:200px">
+                            <apex:selectOptions value="{!OpportunityRecordTypeList}" />
+                        </apex:selectList>
+                    </apex:column>
+                </apex:dataTable>
+            </apex:pageBlockSection>
+        </apex:pageblock>
+    </apex:form> 
+</apex:page>

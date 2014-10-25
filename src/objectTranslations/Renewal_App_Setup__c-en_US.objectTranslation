@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Renewal App Set</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Renewal App Set</value>
+    </caseValues>
+    <fields>
+        <help><!-- If your organization is using asset while verifying entitlements in support cases then check this box to auto convert products on &apos;closed won&apos; opportunities into Asset. Default status on converted asset will be &apos;shipped&apos;. --></help>
+        <label><!-- Convert Product into Asset of Won Opp --></label>
+        <name>Asset__c</name>
+    </fields>
+    <fields>
+        <help><!-- Check this box if Competitor Related List is to be cloned as well onto renewal opportunity while cloning source opportunity to create renewal opportunity. --></help>
+        <label><!-- Clone Competitors Related List --></label>
+        <name>Clone_Competitors_Related_List__c</name>
+    </fields>
+    <fields>
+        <help><!-- Check this box if Contact Roles Related List is to be cloned as well onto renewal opportunity while cloning source opportunity to create renewal opportunity. --></help>
+        <label><!-- Clone Contact Roles --></label>
+        <name>Clone_Contact_Roles__c</name>
+    </fields>
+    <fields>
+        <help><!-- Check this box if Opportunity Team Related List is to be cloned as well onto renewal opportunity while cloning source opportunity to create renewal opportunity. --></help>
+        <label><!-- Clone Opp Team Related List --></label>
+        <name>Clone_Opp_Team_Related_List__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of Opportunity&apos;s &apos;closed/won&apos; stage. Normally is &apos;Closed Won&apos; --></help>
+        <label><!-- Closed Won Stage Name --></label>
+        <name>Closed_Won_Stage_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select the fields that need not be copied while Opportunity is cloned to create Renewal Opp. --></help>
+        <label><!-- Opportunity Field To Not Copy on Renewal --></label>
+        <name>Opportunity_Field_To_Not_Copy_on_Renewal__c</name>
+        <picklistValues>
+            <masterLabel>null</masterLabel>
+            <translation><!-- null --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select the fields that need not be copied while Opportunity Products of source opportunity are cloned to create Renewal Opp. --></help>
+        <label><!-- Opportunity Product Fields To Not Copy --></label>
+        <name>Opportunity_Product_Fields_To_Not_Copy__c</name>
+        <picklistValues>
+            <masterLabel>null</masterLabel>
+            <translation><!-- null --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Original source opp would be suffixed with text entered here to create opportunity name of Renewal Opportunity. --></help>
+        <label><!-- Suffix for Renewal Opportunity Name --></label>
+        <name>Prefix_for_Renewal_Opportunity_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Pick to whom Renewal Opportunity should be assigned. --></help>
+        <label><!-- Renewal Opportunity Owner --></label>
+        <name>Renewal_Opportunity_Owner__c</name>
+        <picklistValues>
+            <masterLabel>A specific User</masterLabel>
+            <translation><!-- A specific User --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Account Owner of Acct tied to Renewal</masterLabel>
+            <translation><!-- Account Owner of Acct tied to Renewal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Same as Source Opportunity Owner</masterLabel>
+            <translation><!-- Same as Source Opportunity Owner --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- A Type field&apos;s value of the Renewal Opportunity.
+Must be equal to one of the picklist values of the &apos;Type&apos; field of opportunity
+Normal value is &apos;Existing Customer - Renewal&apos; --></help>
+        <label><!-- Renewal Opportunity Type --></label>
+        <name>Renewal_Opportunity_Type__c</name>
+    </fields>
+    <fields>
+        <help><!-- First default stage of the Renewal Opportunity.
+Normally is &apos;Prospecting&apos;. Picklist is ordered in ascending default probability of stage. --></help>
+        <label><!-- Renewal Opportunity Default Stage --></label>
+        <name>Renewal_Stage__c</name>
+    </fields>
+    <fields>
+        <help><!-- Pick the user to whom Renewals should get assigned. --></help>
+        <label><!-- Assign Renewal to --></label>
+        <name>User__c</name>
+        <relationshipLabel><!-- Renewal App Set --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

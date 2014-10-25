@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddProduct</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ChoosePricebook</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EditAllProduct</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Asset_Install_Date__c</fullName>
+        <description>Enter asset install date here to be used while product gets converted into asset.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter asset install date here to be used while product gets converted into asset.</inlineHelpText>
+        <label>Asset Install Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Asset_Sr_No__c</fullName>
+        <description>Enter asset serial number</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter asset serial number</inlineHelpText>
+        <label>Asset Sr. No.</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Asset__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Asset of this line item</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Asset of this line item</inlineHelpText>
+        <label>Asset tied to this line item</label>
+        <referenceTo>Asset</referenceTo>
+        <relationshipLabel>Opportunity Product</relationshipLabel>
+        <relationshipName>Opportunity_Product</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Entitlement_End_Date__c</fullName>
+        <description>Enter entitlement end date</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter entitlement end date</inlineHelpText>
+        <label>Entitlement End Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Entitlement_Start_Date__c</fullName>
+        <description>Enter entitlement start date</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter entitlement start date</inlineHelpText>
+        <label>Entitlement Start Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Entitlement_Term__c</fullName>
+        <description>Enter entitlement term</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter entitlement term</inlineHelpText>
+        <label>Entitlement Term</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Is_asset__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Hidden field, should be set to true only when an asset has been created for this Line-Item.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Hidden field, should be set to true only when an asset has been created for this Line-Item.</inlineHelpText>
+        <label>Is Asset Created?</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>OpportunityId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity_LineItem_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Originating Opportunity LineItem ID</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity_LineItem_URL__c</fullName>
+        <externalId>false</externalId>
+        <label>Originating Opportunity LineItem</label>
+        <required>false</required>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Originating_Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Originating Source Opportunity ID from where renewal opportunity was created. This is to be used while updating renewal opp when source opp is updated. Example, renewal opp had 50 quantities on certain product from source opp and later on source opp got updated to 55 quantities of same product. This field will allow to update renewal opp easily.</description>
+        <externalId>false</externalId>
+        <label>Originating Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Opportunity Product</relationshipLabel>
+        <relationshipName>Opportunity_Product</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Product2Id</fullName>
+        <type>Lookup</type>
+    </fields>
+    <validationRules>
+        <fullName>Entitlement_End_Date_less_than_StartDate</fullName>
+        <active>true</active>
+        <errorConditionFormula>Entitlement_End_Date__c &lt; Entitlement_Start_Date__c</errorConditionFormula>
+        <errorDisplayField>Entitlement_End_Date__c</errorDisplayField>
+        <errorMessage>Entitlement End Date cannot be less than Entitlement Start Date</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Entitlement_Term_cannot_be_negative</fullName>
+        <active>true</active>
+        <errorConditionFormula>Entitlement_Term__c &lt; 0</errorConditionFormula>
+        <errorDisplayField>Entitlement_Term__c</errorDisplayField>
+        <errorMessage>Entitlement Term cannot be negative</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Locking_editing_of_line_items_of_won_opp</fullName>
+        <active>true</active>
+        <description>Locking editing of Opportunity Line Items of Closed Won opportunities</description>
+        <errorConditionFormula>Opportunity.IsWon == TRUE &amp;&amp; Opportunity.Ready_For_Renewal__c == TRUE &amp;&amp; ($Profile.Name &lt;&gt; &apos;System Administrator&apos;)</errorConditionFormula>
+        <errorMessage>Opportunity tied to this line item is &apos;Won&apos; and renewal has already been created from it. Hence, this line item can&apos;t be edited further. Please consult system administrator for your org for any desired changes.</errorMessage>
+    </validationRules>
+</CustomObject>

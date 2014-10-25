@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Add</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Family</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Subscription</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Product Subscription</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ProRate_Price__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Check here if you want to allow pro-rating of prices for this product based. E.g. If price set-up is $1200 for one year subscription and when it is sold for 3 month subscription, pro-rated price on opportunity line item would be 1200 * (3/12) = $300.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check here if you want to allow pro-rating of prices for this product based. E.g. If price set-up is $1200 for one year subscription and when it is sold for 3 month subscription, pro-rated price on opportunity line item would be 1200 * (3/12) = $300.</inlineHelpText>
+        <label>Can the price be pro-rated?</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Product_To_Use_In_Renewal__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Pick different product to be added to renewal opportunity when application creates renewal opportunity when this product is part of source opportunity.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Pick different product to be added to renewal opportunity when application creates renewal opportunity when this product is part of source opportunity.</inlineHelpText>
+        <label>Pick Different Product to use in Renewal</label>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Products</relationshipLabel>
+        <relationshipName>Supporting_Products_in_Renewal</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Renewal_Term_Months__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of months after which this product would be renewed.</inlineHelpText>
+        <label>Renewal Term (Months)</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Use_this_same_product_in_Renewal_Opp__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Check this box when you want to use this same product while creating Renewal Opportunity.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check this box when you want to use this same product while creating Renewal Opportunity.</inlineHelpText>
+        <label>Use this same product in Renewal Opp</label>
+        <type>Checkbox</type>
+    </fields>
+    <listViews>
+        <fullName>AllProducts</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All Products</label>
+    </listViews>
+    <searchLayouts>
+        <customTabListAdditionalFields>PRODUCT2.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>PRODUCT2.CUSTOMER_PRODUCT_ID</customTabListAdditionalFields>
+        <customTabListAdditionalFields>PRODUCT2.DESCRIPTION</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>PRODUCT2.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>PRODUCT2.CUSTOMER_PRODUCT_ID</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>PRODUCT2.DESCRIPTION</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>PRODUCT2.FAMILY</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>PRODUCT2.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>PRODUCT2.CUSTOMER_PRODUCT_ID</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>PRODUCT2.DESCRIPTION</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>PRODUCT2.FAMILY</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>PRODUCT2.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PRODUCT2.CUSTOMER_PRODUCT_ID</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PRODUCT2.DESCRIPTION</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PRODUCT2.FAMILY</searchResultsAdditionalFields>
+    </searchLayouts>
+    <validationRules>
+        <fullName>Cannot_be_renewed_in_two_ways</fullName>
+        <active>true</active>
+        <description>Product is either self-renewable or renewed via another product. It CANNOT be both. Pick only one of two.</description>
+        <errorConditionFormula>(Product_To_Use_In_Renewal__c &lt;&gt; NULL &amp;&amp; Use_this_same_product_in_Renewal_Opp__c = true)</errorConditionFormula>
+        <errorMessage>Product is either self-renewable or renewed via another product. It CANNOT be both. Pick only one of two.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Pro_Rate_only_renewable_products</fullName>
+        <active>true</active>
+        <errorConditionFormula>(Product_To_Use_In_Renewal__c == NULL &amp;&amp; Use_this_same_product_in_Renewal_Opp__c = false &amp;&amp; ProRate_Price__c = true)</errorConditionFormula>
+        <errorDisplayField>ProRate_Price__c</errorDisplayField>
+        <errorMessage>Only renewable products are allowed to be pro-rated. Un-check &apos;can the product be pro-rated?&apos; checkbox or make this product renewable to save.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Renewal_Term_is_defined</fullName>
+        <active>true</active>
+        <description>Making sure that renewal term is defined for renewable products</description>
+        <errorConditionFormula>(Product_To_Use_In_Renewal__c &lt;&gt; NULL || Use_this_same_product_in_Renewal_Opp__c = true) &amp;&amp; ISNULL(Renewal_Term_Months__c)</errorConditionFormula>
+        <errorDisplayField>Renewal_Term_Months__c</errorDisplayField>
+        <errorMessage>Please enter renewal term for a renewable product</errorMessage>
+    </validationRules>
+</CustomObject>

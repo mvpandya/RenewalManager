@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Opp Record Type Mapping</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Opp Record Type Mappings</value>
+    </caseValues>
+    <fields>
+        <help><!-- Stores ID of Renewal Opp Record Type --></help>
+        <label><!-- Renewal Opp Record Type ID --></label>
+        <name>Renewal_Opp_Record_Type_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores Name of Renewal Opp Record Type --></help>
+        <label><!-- Renewal Opp Record Type Name --></label>
+        <name>Renewal_Opp_Record_Type_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores ID of Source Opp Record Type --></help>
+        <label><!-- Source Opp Record Type ID --></label>
+        <name>Source_Opp_Record_Type_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores Name of Source Opp Record Type --></help>
+        <label><!-- Source Opp Record Type Name --></label>
+        <name>Source_Opp_Record_Type_Name__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

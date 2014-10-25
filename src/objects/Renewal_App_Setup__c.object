@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>Asset__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If your organization is using asset while verifying entitlements in support cases then check this box to auto convert products on &apos;closed won&apos; opportunities into Asset. Default status on converted asset will be &apos;shipped&apos;.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If your organization is using asset while verifying entitlements in support cases then check this box to auto convert products on &apos;closed won&apos; opportunities into Asset. Default status on converted asset will be &apos;shipped&apos;.</inlineHelpText>
+        <label>Convert Product into Asset of Won Opp</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Clone_Competitors_Related_List__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Check this box if Competitor Related List is to be cloned as well onto renewal opportunity while cloning source opportunity to create renewal opportunity.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check this box if Competitor Related List is to be cloned as well onto renewal opportunity while cloning source opportunity to create renewal opportunity.</inlineHelpText>
+        <label>Clone Competitors Related List</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Clone_Contact_Roles__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Check this box if Contact Roles Related List is to be cloned as well onto renewal opportunity while cloning source opportunity to create renewal opportunity.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check this box if Contact Roles Related List is to be cloned as well onto renewal opportunity while cloning source opportunity to create renewal opportunity.</inlineHelpText>
+        <label>Clone Contact Roles</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Clone_Opp_Team_Related_List__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Check this box if Opportunity Team Related List is to be cloned as well onto renewal opportunity while cloning source opportunity to create renewal opportunity.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check this box if Opportunity Team Related List is to be cloned as well onto renewal opportunity while cloning source opportunity to create renewal opportunity.</inlineHelpText>
+        <label>Clone Opp Team Related List</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Closed_Won_Stage_Name__c</fullName>
+        <defaultValue>&quot;Closed Won&quot;</defaultValue>
+        <description>Name of Opportunity&apos;s &apos;closed/won&apos; stage. Normally is &apos;Closed Won&apos;</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Name of Opportunity&apos;s &apos;closed/won&apos; stage. Normally is &apos;Closed Won&apos;</inlineHelpText>
+        <label>Closed Won Stage Name</label>
+        <length>128</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Field_To_Not_Copy_on_Renewal__c</fullName>
+        <description>Select the fields that need not be copied while Opportunity is cloned to create Renewal Opp.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the fields that need not be copied while Opportunity is cloned to create Renewal Opp.</inlineHelpText>
+        <label>Opportunity Field To Not Copy on Renewal</label>
+        <picklist>
+            <picklistValues>
+                <fullName>null</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Product_Fields_To_Not_Copy__c</fullName>
+        <description>Select the fields that need not be copied while Opportunity Products of source opportunity are cloned to create Renewal Opp.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the fields that need not be copied while Opportunity Products of source opportunity are cloned to create Renewal Opp.</inlineHelpText>
+        <label>Opportunity Product Fields To Not Copy</label>
+        <picklist>
+            <picklistValues>
+                <fullName>null</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Prefix_for_Renewal_Opportunity_Name__c</fullName>
+        <defaultValue>&quot;Renewal&quot;</defaultValue>
+        <description>Sufffix for Renewal Opportunity. Original source opportunity would be suffixed with text entered here to create opportunity name of Renewal Opportunity. E.g. Text entered in this field is &apos;Renewal &apos; and name of original source opportunity is &apos;Software Support Purchase&apos; then name of Renewal Opportunity would be &apos;Software Support Purchase : Renewal - 10/2013&apos;. 10/2013 indicates month and year renewal is due.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Original source opp would be suffixed with text entered here to create opportunity name of Renewal Opportunity.</inlineHelpText>
+        <label>Suffix for Renewal Opportunity Name</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Renewal_Opportunity_Owner__c</fullName>
+        <description>Pick to whom Renewal Opportunity should be assigned.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Pick to whom Renewal Opportunity should be assigned.</inlineHelpText>
+        <label>Renewal Opportunity Owner</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Same as Source Opportunity Owner</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Account Owner of Acct tied to Renewal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>A specific User</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Renewal_Opportunity_Type__c</fullName>
+        <description>A &apos;Type&apos; field&apos;s value of the Renewal Opportunity.
+Must be equal to one of the picklist values of the &apos;Type&apos; field of opportunity</description>
+        <externalId>false</externalId>
+        <inlineHelpText>A Type field&apos;s value of the Renewal Opportunity.
+Must be equal to one of the picklist values of the &apos;Type&apos; field of opportunity
+Normal value is &apos;Existing Customer - Renewal&apos;</inlineHelpText>
+        <label>Renewal Opportunity Type</label>
+        <length>128</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Renewal_Stage__c</fullName>
+        <description>First default stage of the Renewal Opportunity.
+Normally is &apos;Prospecting&apos;. Picklist is ordered in ascending default probability of stage.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>First default stage of the Renewal Opportunity.
+Normally is &apos;Prospecting&apos;. Picklist is ordered in ascending default probability of stage.</inlineHelpText>
+        <label>Renewal Opportunity Default Stage</label>
+        <length>128</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>User__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Pick the user to whom Renewals should get assigned.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Pick the user to whom Renewals should get assigned.</inlineHelpText>
+        <label>Assign Renewal to</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Renewal_App_Set</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Renewal App Set</label>
+    <nameField>
+        <displayFormat>A-{0000}</displayFormat>
+        <label>Renewal App Set Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Renewal App Set</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>
